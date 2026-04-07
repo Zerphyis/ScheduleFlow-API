@@ -10,6 +10,17 @@ public class Client {
         return id;
     }
 
+    public Client(Long id, String nome, String cpf, String telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.telefone = telefone;
+    }
+
+    public Client( ) {
+
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
