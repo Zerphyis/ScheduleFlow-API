@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "appointments")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Appointment {
+public class AppointmentJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,26 +4,28 @@ import dev.zerphyis.schedule.domain.entites.Professional;
 import dev.zerphyis.schedule.infra.persistance.entites.ProfessionalJpa;
 
 public class ProfessionalMapper {
-        public static Professional toDomain(ProfessionalJpa entity) {
-            if (entity == null) return null;
 
-            return new Professional(
-                    entity.getId(),
-                    entity.getNome(),
-                    entity.getEspecialidade(),
-                    entity.getEmail()
-            );
-        }
+    public static Professional toDomain(ProfessionalJpa entity) {
+        if (entity == null) return null;
 
-        public static ProfessionalJpa toEntity(Professional domain) {
-            if (domain == null) return null;
+        Professional professional = new Professional();
+        professional.setId(entity.getId());
+        professional.setNome(entity.getNome());
+        professional.setEspecialidade(entity.getEspecialidade());
+        professional.setEmail(entity.getEmail());
 
-            return new ProfessionalJpa(
-                    domain.getId(),
-                    domain.getNome(),
-                    domain.getEspecialidade(),
-                    domain.getEmail()
-            );
-        }
+        return professional;
     }
 
+    public static ProfessionalJpa toEntity(Professional domain) {
+        if (domain == null) return null;
+
+        ProfessionalJpa entity = new ProfessionalJpa();
+        entity.setId(domain.getId());
+        entity.setNome(domain.getNome());
+        entity.setEspecialidade(domain.getEspecialidade());
+        entity.setEmail(domain.getEmail());
+
+        return entity;
+    }
+}
