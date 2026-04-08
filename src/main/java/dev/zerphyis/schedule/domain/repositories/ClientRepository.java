@@ -7,12 +7,15 @@ import java.util.Optional;
 
 public interface ClientRepository {
 
-        Client save(Client client);
 
-        Optional<Client> findById(Long id);
+    Client save(Client client);
 
-        List<Client> findAll();
+    Optional<Client> findById(Long id);
 
-        void deleteById(Long id);
+    List<Client> findAll();
+
+    void deleteById(Long id);
+
+    boolean existsByCpf(String cpf);
     }
 

@@ -41,6 +41,11 @@ public class ClientRepositoryAdapter implements ClientRepository {
     }
 
     @Override
+    public boolean existsByCpf(String cpf) {
+        return repository.existsByCpf(cpf);
+    }
+
+    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
