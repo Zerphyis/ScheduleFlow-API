@@ -1,4 +1,4 @@
-package dev.zerphyis.schedule.infra.mappers.dtos;
+package dev.zerphyis.schedule.infra.mappers.dtos.Professional;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
