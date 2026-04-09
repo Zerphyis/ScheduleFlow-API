@@ -5,8 +5,8 @@ import dev.zerphyis.schedule.application.exception.clientException.InvalidClient
 import dev.zerphyis.schedule.application.interfaceCases.Client.CreateClientCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Client;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientReponseDTO;
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientRequestDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 
 public class CreateClientUseCase implements CreateClientCaseInterface {
     private final ClientRepository repository;

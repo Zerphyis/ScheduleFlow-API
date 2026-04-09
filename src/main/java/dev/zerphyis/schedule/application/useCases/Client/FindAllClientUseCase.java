@@ -2,7 +2,7 @@ package dev.zerphyis.schedule.application.useCases.Client;
 
 import dev.zerphyis.schedule.application.interfaceCases.Client.FindAllClientsCaseInterface;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;

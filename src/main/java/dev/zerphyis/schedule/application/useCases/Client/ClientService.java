@@ -1,7 +1,7 @@
 package dev.zerphyis.schedule.application.useCases.Client;
 
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientReponseDTO;
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientRequestDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 
 import java.util.List;
 

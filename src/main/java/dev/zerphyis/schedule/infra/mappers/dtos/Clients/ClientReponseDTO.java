@@ -1,4 +1,4 @@
-package dev.zerphyis.schedule.infra.mappers.dtos;
+package dev.zerphyis.schedule.infra.mappers.dtos.Clients;
 
 public record ClientReponseDTO(
         Long id,
