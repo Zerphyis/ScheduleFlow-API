@@ -1,4 +1,4 @@
-package dev.zerphyis.schedule.infra.mappers.dtos;
+package dev.zerphyis.schedule.infra.mappers.dtos.Appointments;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
