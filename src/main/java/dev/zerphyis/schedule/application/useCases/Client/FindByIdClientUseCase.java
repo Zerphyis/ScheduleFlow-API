@@ -4,7 +4,7 @@ import dev.zerphyis.schedule.application.exception.clientException.ClientNotFoun
 import dev.zerphyis.schedule.application.interfaceCases.Client.FindByidClientCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Client;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
 
 public class FindByIdClientUseCase implements FindByidClientCaseInterface {
 
