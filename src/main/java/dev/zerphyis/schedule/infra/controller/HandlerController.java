@@ -1,5 +1,9 @@
 package dev.zerphyis.schedule.infra.controller;
 
+import dev.zerphyis.schedule.application.exception.ProfessionalException.BusinessException;
+import dev.zerphyis.schedule.application.exception.ProfessionalException.DuplicateProfessionalException;
+import dev.zerphyis.schedule.application.exception.ProfessionalException.ProfessionalNotFoundException;
+
 import dev.zerphyis.schedule.application.exception.clientException.ClientAlreadyExistsException;
 import dev.zerphyis.schedule.application.exception.clientException.ClientNotFoundException;
 import dev.zerphyis.schedule.application.exception.clientException.InvalidClientDataException;
@@ -17,8 +21,9 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class HandlerController {
 
+
     @ExceptionHandler(ClientNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFound(
+    public ResponseEntity<ErrorResponse> handleClientNotFound(
             ClientNotFoundException ex,
             HttpServletRequest request
     ) {
@@ -26,7 +31,7 @@ public class HandlerController {
     }
 
     @ExceptionHandler(ClientAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponse> handleConflict(
+    public ResponseEntity<ErrorResponse> handleClientConflict(
             ClientAlreadyExistsException ex,
             HttpServletRequest request
     ) {
@@ -34,12 +39,39 @@ public class HandlerController {
     }
 
     @ExceptionHandler(InvalidClientDataException.class)
-    public ResponseEntity<ErrorResponse> handleBadRequest(
+    public ResponseEntity<ErrorResponse> handleClientBadRequest(
             InvalidClientDataException ex,
             HttpServletRequest request
     ) {
         return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
     }
+
+
+    @ExceptionHandler(ProfessionalNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProfessionalNotFound(
+            ProfessionalNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(DuplicateProfessionalException.class)
+    public ResponseEntity<ErrorResponse> handleProfessionalConflict(
+            DuplicateProfessionalException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(HttpStatus.CONFLICT, ex.getMessage(), request);
+    }
+
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessException(
+            BusinessException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(
@@ -56,6 +88,7 @@ public class HandlerController {
         return buildResponse(HttpStatus.BAD_REQUEST, message, request);
     }
 
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(
             Exception ex,
@@ -63,6 +96,7 @@ public class HandlerController {
     ) {
         return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), request);
     }
+
 
     private ResponseEntity<ErrorResponse> buildResponse(
             HttpStatus status,
