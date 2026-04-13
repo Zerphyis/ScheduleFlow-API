@@ -4,6 +4,7 @@ import dev.zerphyis.schedule.application.exception.ProfessionalException.Busines
 import dev.zerphyis.schedule.application.exception.ProfessionalException.DuplicateProfessionalException;
 import dev.zerphyis.schedule.application.exception.ProfessionalException.ProfessionalNotFoundException;
 
+import dev.zerphyis.schedule.application.exception.appointmentException.ResourceNotFoundException;
 import dev.zerphyis.schedule.application.exception.clientException.ClientAlreadyExistsException;
 import dev.zerphyis.schedule.application.exception.clientException.ClientNotFoundException;
 import dev.zerphyis.schedule.application.exception.clientException.InvalidClientDataException;
@@ -113,5 +114,13 @@ public class HandlerController {
         );
 
         return ResponseEntity.status(status).body(error);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            ResourceNotFoundException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request);
     }
 }
