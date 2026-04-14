@@ -8,6 +8,7 @@ import dev.zerphyis.schedule.infra.persistance.repository.AppointmentRepositoryJ
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class AppointmentRepositoryAdapter implements AppointmentRepository {
@@ -27,6 +28,16 @@ public class AppointmentRepositoryAdapter implements AppointmentRepository {
         AppointmentJpa entity = AppointmentMapper.toEntity(appointment);
         AppointmentJpa saved = jpaRepository.save(entity);
         return AppointmentMapper.toDomain(saved);
+    }
+
+    @Override
+    public List<Appointment> findAllByProfessionalIdOrderByDateTimeAsc(Long professionalId) {
+
+        return jpaRepository
+                .findAllByProfessionalIdOrderByDateTimeAsc(professionalId)
+                .stream()
+                .map(AppointmentMapper::toDomain)
+                .toList();
     }
 
 
