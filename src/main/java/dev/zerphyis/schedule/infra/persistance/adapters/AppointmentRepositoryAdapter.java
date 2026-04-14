@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class AppointmentRepositoryAdapter implements AppointmentRepository {
@@ -39,6 +40,14 @@ public class AppointmentRepositoryAdapter implements AppointmentRepository {
                 .map(AppointmentMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Optional<Appointment> findById(Long id) {
+        return jpaRepository.findById(id)
+                .map(AppointmentMapper::toDomain);
+    }
+
+
 
 
 }
