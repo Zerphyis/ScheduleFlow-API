@@ -47,7 +47,10 @@ public class AppointmentRepositoryAdapter implements AppointmentRepository {
                 .map(AppointmentMapper::toDomain);
     }
 
-
+    @Override
+    public void deleteById(Long id) {
+        jpaRepository.deleteById(id);
+    }
 
 
 }
