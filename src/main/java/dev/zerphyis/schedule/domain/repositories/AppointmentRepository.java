@@ -15,6 +15,6 @@ public interface AppointmentRepository {
 
     Optional<Appointment> findById(Long id);
 
-
+    void deleteById(Long id);
 
 }
