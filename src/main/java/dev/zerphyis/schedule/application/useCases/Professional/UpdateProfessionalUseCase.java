@@ -1,5 +1,6 @@
 package dev.zerphyis.schedule.application.useCases.Professional;
 
+import dev.zerphyis.schedule.application.exception.ProfessionalException.InvalidProfessionalDataException;
 import dev.zerphyis.schedule.application.exception.ProfessionalException.ProfessionalNotFoundException;
 import dev.zerphyis.schedule.application.interfaceCases.Professional.UpdateProfessionalCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Professional;
@@ -14,11 +15,24 @@ public class UpdateProfessionalUseCase  implements UpdateProfessionalCaseInterfa
     public UpdateProfessionalUseCase(ProfessionalRepository repository) {
         this.repository = repository;
     }
-@Override
+
+    @Override
     public ProfessionalResponseDTO execute(Long id, ProfessionalRequestDTO dto) {
 
         Professional existing = repository.findById(id)
                 .orElseThrow(() -> new ProfessionalNotFoundException(id));
+
+        if (dto.nome() == null || dto.nome().isBlank()) {
+            throw new InvalidProfessionalDataException("Nome é obrigatório");
+        }
+
+        if (dto.especialidade() == null || dto.especialidade().isBlank()) {
+            throw new InvalidProfessionalDataException("Especialidade é obrigatória");
+        }
+
+        if (dto.email() == null || dto.email().isBlank()) {
+            throw new InvalidProfessionalDataException("Email é obrigatório");
+        }
 
         existing.setNome(dto.nome());
         existing.setEspecialidade(dto.especialidade());
