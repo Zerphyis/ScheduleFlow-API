@@ -2,6 +2,7 @@ package dev.zerphyis.schedule.infra.controller;
 
 import dev.zerphyis.schedule.application.exception.ProfessionalException.BusinessException;
 import dev.zerphyis.schedule.application.exception.ProfessionalException.DuplicateProfessionalException;
+import dev.zerphyis.schedule.application.exception.ProfessionalException.InvalidProfessionalDataException;
 import dev.zerphyis.schedule.application.exception.ProfessionalException.ProfessionalNotFoundException;
 
 import dev.zerphyis.schedule.application.exception.appointmentException.ConflictException;
@@ -123,6 +124,14 @@ public class HandlerController {
             HttpServletRequest request
     ) {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage(), request);
+    }
+
+    @ExceptionHandler(InvalidProfessionalDataException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            InvalidProfessionalDataException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(HttpStatus.BAD_REQUEST, ex.getMessage(), request);
     }
 
     @ExceptionHandler(ConflictException.class)
