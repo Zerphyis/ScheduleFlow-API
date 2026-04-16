@@ -13,14 +13,23 @@ public class CheckScheduleConflictUseCase implements CheckScheduleConflictInterf
         this.appointmentRepository = appointmentRepository;
     }
 
+    @Override
     public void execute(Long professionalId, LocalDateTime dateTime) {
+
+        if (professionalId == null) {
+            throw new IllegalArgumentException("professionalId não pode ser nulo");
+        }
+
+        if (dateTime == null) {
+            throw new IllegalArgumentException("dateTime não pode ser nulo");
+        }
 
         boolean exists = appointmentRepository
                 .existsByProfessionalIdAndDateTime(professionalId, dateTime);
 
         if (exists) {
             throw new ConflictException(
-                    "Este horário já está ocupado para o profissional informado"
+                    "O profissional já possui agendamento em: " + dateTime
             );
         }
     }
