@@ -2,7 +2,7 @@ package dev.zerphyis.schedule.infra.controller;
 
 
 import dev.zerphyis.schedule.application.useCases.Client.ClientService;
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -23,22 +23,22 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientReponseDTO create(@RequestBody @Valid ClientRequestDTO dto) {
+    public ClientResponseDTO create(@RequestBody @Valid ClientRequestDTO dto) {
         return service.create(dto);
     }
 
     @GetMapping("/{id}")
-    public ClientReponseDTO findById(@PathVariable Long id) {
+    public ClientResponseDTO findById(@PathVariable Long id) {
         return service.findById(id);
     }
 
     @GetMapping
-    public List<ClientReponseDTO> findAll() {
+    public List<ClientResponseDTO> findAll() {
         return service.findAll();
     }
 
     @PutMapping("/{id}")
-    public ClientReponseDTO update(
+    public ClientResponseDTO update(
             @PathVariable Long id,
             @RequestBody @Valid ClientRequestDTO dto
     ) {
