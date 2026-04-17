@@ -1,11 +1,12 @@
 package dev.zerphyis.schedule.application.useCases.Appointment;
 
-import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentRequestDTO;
 
 import java.util.List;
 
 public class AppointmentService {
+
 
     private final CreateAppointmentUseCase createAppointmentUseCase;
     private final ListProfessionalScheduleUseCase listProfessionalScheduleUseCase;
@@ -21,11 +22,11 @@ public class AppointmentService {
         this.cancelAppointmentUseCase = cancelAppointmentUseCase;
     }
 
-    public AppointmentReponseDTO create(AppointmentRequestDTO request) {
+    public AppointmentResponseDTO create(AppointmentRequestDTO request) {
         return createAppointmentUseCase.execute(request);
     }
 
-    public List<AppointmentReponseDTO> listByProfessional(Long professionalId) {
+    public List<AppointmentResponseDTO> listByProfessional(Long professionalId) {
         return listProfessionalScheduleUseCase.execute(professionalId);
     }
 

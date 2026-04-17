@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
-public record AppointmentReponseDTO(
+public record AppointmentResponseDTO(
         Long id,
         String professionalName,
         String clientName,

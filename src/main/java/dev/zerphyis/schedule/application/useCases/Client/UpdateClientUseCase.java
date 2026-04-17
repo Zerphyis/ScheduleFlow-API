@@ -5,7 +5,7 @@ import dev.zerphyis.schedule.application.exception.clientException.ClientNotFoun
 import dev.zerphyis.schedule.application.interfaceCases.Client.UpdateClientCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Client;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 
 public class UpdateClientUseCase implements UpdateClientCaseInterface {
@@ -16,7 +16,7 @@ public class UpdateClientUseCase implements UpdateClientCaseInterface {
     }
 
     @Override
-    public ClientReponseDTO execute(Long id, ClientRequestDTO dto) {
+    public ClientResponseDTO execute(Long id, ClientRequestDTO dto) {
 
         Client existing = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(id));
@@ -32,7 +32,7 @@ public class UpdateClientUseCase implements UpdateClientCaseInterface {
 
         Client updated = repository.save(existing);
 
-        return new ClientReponseDTO(
+        return new ClientResponseDTO(
                 updated.getId(),
                 updated.getNome(),
                 updated.getCpf(),

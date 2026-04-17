@@ -5,7 +5,7 @@ import dev.zerphyis.schedule.application.interfaceCases.Appointment.ListProfessi
 import dev.zerphyis.schedule.domain.entites.Appointment;
 import dev.zerphyis.schedule.domain.repositories.AppointmentRepository;
 import dev.zerphyis.schedule.domain.repositories.ProfessionalRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentResponseDTO;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class ListProfessionalScheduleUseCase implements ListProfessionalSchedule
     }
 
     @Override
-    public List<AppointmentReponseDTO> execute(Long professionalId) {
+    public List<AppointmentResponseDTO> execute(Long professionalId) {
 
         professionalRepository.findById(professionalId)
                 .orElseThrow(() ->
@@ -33,7 +33,7 @@ public class ListProfessionalScheduleUseCase implements ListProfessionalSchedule
                 appointmentRepository.findAllByProfessionalIdOrderByDateTimeAsc(professionalId);
 
         return appointments.stream()
-                .map(appointment -> new AppointmentReponseDTO(
+                .map(appointment -> new AppointmentResponseDTO(
                         appointment.getId(),
                         appointment.getProfessional().getNome(),
                         appointment.getClient().getNome(),

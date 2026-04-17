@@ -1,6 +1,6 @@
 package dev.zerphyis.schedule.application.useCases.Client;
 
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 
 import java.util.List;
@@ -26,19 +26,19 @@ public class ClientService {
         this.deleteUseCase = deleteUseCase;
     }
 
-    public ClientReponseDTO create(ClientRequestDTO dto) {
+    public ClientResponseDTO create(ClientRequestDTO dto) {
         return createUseCase.execute(dto);
     }
 
-    public ClientReponseDTO findById(Long id) {
+    public ClientResponseDTO findById(Long id) {
         return findByIdUseCase.execute(id);
     }
 
-    public List<ClientReponseDTO> findAll() {
+    public List<ClientResponseDTO> findAll() {
         return findAllUseCase.execute();
     }
 
-    public ClientReponseDTO update(Long id, ClientRequestDTO dto) {
+    public ClientResponseDTO update(Long id, ClientRequestDTO dto) {
         return updateUseCase.execute(id, dto);
     }
 
