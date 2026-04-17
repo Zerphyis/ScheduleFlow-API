@@ -4,7 +4,7 @@ import dev.zerphyis.schedule.application.exception.clientException.ClientNotFoun
 import dev.zerphyis.schedule.application.interfaceCases.Client.FindByidClientCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Client;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 
 public class FindByIdClientUseCase implements FindByidClientCaseInterface {
 
@@ -15,12 +15,12 @@ public class FindByIdClientUseCase implements FindByidClientCaseInterface {
     }
 
     @Override
-    public ClientReponseDTO execute(Long id) {
+    public ClientResponseDTO execute(Long id) {
 
         Client client = repository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException(id));
 
-        return new ClientReponseDTO(
+        return new ClientResponseDTO(
                 client.getId(),
                 client.getNome(),
                 client.getCpf(),
