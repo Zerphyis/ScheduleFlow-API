@@ -2,7 +2,7 @@ package dev.zerphyis.schedule.application.useCases.Client;
 
 import dev.zerphyis.schedule.application.interfaceCases.Client.FindAllClientsCaseInterface;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +15,11 @@ public class FindAllClientUseCase  implements FindAllClientsCaseInterface {
     }
 
     @Override
-    public List<ClientReponseDTO> execute() {
+    public List<ClientResponseDTO> execute() {
 
         return repository.findAll()
                 .stream()
-                .map(client -> new ClientReponseDTO(
+                .map(client -> new ClientResponseDTO(
                         client.getId(),
                         client.getNome(),
                         client.getCpf(),
