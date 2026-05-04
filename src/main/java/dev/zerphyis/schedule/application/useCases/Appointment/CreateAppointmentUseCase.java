@@ -8,7 +8,7 @@ import dev.zerphyis.schedule.domain.entites.Professional;
 import dev.zerphyis.schedule.domain.repositories.AppointmentRepository;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
 import dev.zerphyis.schedule.domain.repositories.ProfessionalRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Appointments.AppointmentRequestDTO;
 
 public class CreateAppointmentUseCase implements CreateAppointmentInterfaceCase {
@@ -30,7 +30,7 @@ public class CreateAppointmentUseCase implements CreateAppointmentInterfaceCase 
 
 
     @Override
-    public AppointmentReponseDTO execute(AppointmentRequestDTO request) {
+    public AppointmentResponseDTO execute(AppointmentRequestDTO request) {
 
         Professional professional = professionalRepository.findById(request.professionalId())
                 .orElseThrow(() ->
@@ -56,7 +56,7 @@ public class CreateAppointmentUseCase implements CreateAppointmentInterfaceCase 
 
         Appointment saved = appointmentRepository.save(appointment);
 
-        return new AppointmentReponseDTO(
+        return new AppointmentResponseDTO(
                 saved.getId(),
                 saved.getProfessional().getNome(),
                 saved.getClient().getNome(),
