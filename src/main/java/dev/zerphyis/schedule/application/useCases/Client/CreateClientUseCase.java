@@ -5,7 +5,7 @@ import dev.zerphyis.schedule.application.exception.clientException.InvalidClient
 import dev.zerphyis.schedule.application.interfaceCases.Client.CreateClientCaseInterface;
 import dev.zerphyis.schedule.domain.entites.Client;
 import dev.zerphyis.schedule.domain.repositories.ClientRepository;
-import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientReponseDTO;
+import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientResponseDTO;
 import dev.zerphyis.schedule.infra.mappers.dtos.Clients.ClientRequestDTO;
 
 public class CreateClientUseCase implements CreateClientCaseInterface {
@@ -16,7 +16,7 @@ public class CreateClientUseCase implements CreateClientCaseInterface {
     }
 
     @Override
-    public ClientReponseDTO execute(ClientRequestDTO dto) {
+    public ClientResponseDTO execute(ClientRequestDTO dto) {
 
         if (dto.nome() == null || dto.nome().isBlank()) {
             throw new InvalidClientDataException("Nome é obrigatório");
@@ -39,7 +39,7 @@ public class CreateClientUseCase implements CreateClientCaseInterface {
 
         Client saved = repository.save(client);
 
-        return new ClientReponseDTO(
+        return new ClientResponseDTO(
                 saved.getId(),
                 saved.getNome(),
                 saved.getCpf(),
