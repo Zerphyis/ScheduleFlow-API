@@ -215,4 +215,76 @@ Os Services funcionam como facades e gerenciam cache automaticamente.
 - TTL padrão: **10 minutos**
 - Valores nulos nunca são cacheados.
 
+## 🚀 Endpoints
+
+## 📋 Agendamentos — `/appointments`
+
+
+
+### POST `/appointments`
+
+Cria um agendamento.
+
+#### Body
+
+```json
+{
+  "professionalId": 1,
+  "clientId": 2,
+  "dateTime": "25/12/2025 10:00"
+}
+```
+
+### Regras
+
+- Formato obrigatório: `dd/MM/yyyy HH:mm`
+- Deve ser uma data futura.
+
+#### Response — `201 Created`
+
+```json
+{
+  "id": 1,
+  "professionalName": "Dr. João",
+  "clientName": "Maria Silva",
+  "dateTime": "25/12/2025 10:00"
+}
+```
+
 ---
+
+### GET `/appointments/professional/{professionalId}`
+
+Lista os agendamentos do profissional.
+
+#### Response — `200 OK`
+
+```json
+[
+  {
+    "id": 1,
+    "professionalName": "Dr. João",
+    "clientName": "Maria Silva",
+    "dateTime": "25/12/2025 10:00"
+  }
+]
+```
+
+#### Observações
+
+- Ordenado por `dateTime`.
+- Resposta cacheada por profissional.
+
+---
+
+### DELETE `/appointments/{appointmentId}`
+
+Cancela um agendamento.
+
+#### Response — `204 No Content`
+
+### Regra
+
+Cancelamento permitido apenas com 24 horas de antecedência.
+
+
