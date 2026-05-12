@@ -167,4 +167,52 @@ Caso já exista um agendamento no mesmo horário:
 ConflictException → 409 Conflict
 ```
 
+## 3️⃣ Persistência
 
+O sistema:
+
+- Busca o Professional pelo ID.
+- Busca o Client pelo ID.
+- Cria a entidade Appointment.
+- Persiste no banco.
+- Invalida o cache do profissional via `@CacheEvict`.
+
+
+
+## 🗑️ Como Funciona o Cancelamento de Agendamentos
+
+O `CancelAppointmentUseCase` aplica uma regra antes de remover:
+
+1. Busca o agendamento pelo ID.
+2. Verifica se o cancelamento possui pelo menos 24 horas de antecedência.
+3. Remove o agendamento.
+4. Limpa o cache.
+
+Caso a regra falhe:
+
+```text
+BusinessException → cancelamento permitido apenas com 24h de antecedência
+```
+
+## 💾 Cache com Redis
+
+Os Services funcionam como facades e gerenciam cache automaticamente.
+
+| Service | Operação | Cache |
+|---|---|---|
+| AppointmentService.listByProfessional | GET | `@Cacheable("appointments")` |
+| AppointmentService.create | POST | `@CacheEvict("appointments")` |
+| AppointmentService.cancel | DELETE | `@CacheEvict(allEntries=true)` |
+| ClientService.findById | GET | `@Cacheable("clients")` |
+| ClientService.findAll | GET | `@Cacheable("clientsList")` |
+| ClientService.create/update/delete | Mutação | `@CacheEvict` |
+| ProfessionalService.findById | GET | `@Cacheable("professionals")` |
+| ProfessionalService.findAll | GET | `@Cacheable("professionalsList")` |
+| ProfessionalService.create/update/delete | Mutação | `@CacheEvict` |
+
+### Configuração
+
+- TTL padrão: **10 minutos**
+- Valores nulos nunca são cacheados.
+
+---
