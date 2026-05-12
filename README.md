@@ -435,3 +435,74 @@ Remove um profissional.
 #### Response — `204 No Content`
 
 
+## ⚠️ Tratamento de Erros
+
+Todas as exceções são interceptadas pelo `HandlerController` (`@RestControllerAdvice`).
+
+#### Exemplo de resposta
+
+```json
+{
+  "status": 409,
+  "error": "Conflict",
+  "message": "O profissional já possui agendamento em: 2025-12-25T10:00",
+  "path": "/appointments",
+  "timestamp": "2025-12-25T09:30:00"
+}
+```
+
+---
+
+### Tabela de Exceções
+
+| Exceção | HTTP | Gatilho |
+|---|---|---|
+| ClientNotFoundException | 404 | Cliente não encontrado |
+| ClientAlreadyExistsException | 409 | CPF já cadastrado |
+| InvalidClientDataException | 400 | Dados inválidos |
+| ProfessionalNotFoundException | 404 | Profissional não encontrado |
+| DuplicateProfessionalException | 409 | Profissional duplicado |
+| InvalidProfessionalDataException | 400 | Dados inválidos |
+| BusinessException | 400 | Violação de regra de negócio |
+| ResourceNotFoundException | 404 | Recurso não encontrado |
+| ConflictException | 409 | Conflito de horário |
+| MethodArgumentNotValidException | 400 | Falha no Bean Validation |
+| Exception | 500 | Erro inesperado |
+
+
+
+## 🗄️ Entidades de Domínio
+
+### 👤 Client
+
+| Campo | Tipo | Validação |
+|---|---|---|
+| id | Long | Gerado automaticamente |
+| nome | String | Obrigatório |
+| cpf | String | Obrigatório e único |
+| telefone | String | Obrigatório |
+
+
+### 🩺 Professional
+
+| Campo | Tipo | Validação |
+|---|---|---|
+| id | Long | Gerado automaticamente |
+| nome | String | Obrigatório |
+| especialidade | String | Obrigatório |
+| email | String | Obrigatório e válido |
+
+
+
+### 📅 Appointment
+
+| Campo | Tipo | Validação |
+|---|---|---|
+| id | Long | Gerado automaticamente |
+| dateTime | LocalDateTime | Obrigatório e futuro |
+| professional | Professional | Obrigatório |
+| client | Client | Obrigatório |
+
+
+
+
