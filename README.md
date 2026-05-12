@@ -503,6 +503,37 @@ Todas as exceções são interceptadas pelo `HandlerController` (`@RestControlle
 | professional | Professional | Obrigatório |
 | client | Client | Obrigatório |
 
+## 📖 Documentação Swagger
 
+Com a aplicação rodando:
 
+```text
+http://localhost:8080/swagger-ui.html
+```
 
+---
+
+## ▶️ Como Rodar
+
+### Pré-requisitos
+
+- Java 17+
+- Maven
+- MySQL
+- Redis
+
+---
+
+### Execução
+
+```bash
+./mvnw spring-boot:run
+```
+
+---
+
+### Testes
+
+```bash
+./mvnw test
+```
