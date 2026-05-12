@@ -116,3 +116,55 @@ Spring Data JPA
 MySQL
 ```
 
+## 🔁 Inversão de Dependência na Persistência
+
+O domínio nunca enxerga o JPA diretamente.
+
+O `AppointmentRepositoryAdapter`, por exemplo, implementa `AppointmentRepository` (interface de domínio) e internamente utiliza `AppointmentRepositoryJpa` (Spring Data JPA).
+
+O mesmo padrão é aplicado para:
+
+- Client
+- Professional
+- Appointment
+
+
+## ⚙️ Como Funciona a Criação de Agendamentos
+
+Ao receber um `POST /appointments`, o `AppointmentService` delega ao `CreateAppointmentUseCase`, que executa três etapas:
+
+---
+
+## 1️⃣ ValidateScheduleUseCase — Regras de Negócio
+
+Valida o `dateTime` recebido contra três regras:
+
+| Regra | Detalhe |
+|---|---|
+| Dia da semana | Agendamentos aos domingos são bloqueados |
+| Horário comercial | Apenas entre 08:00 e 17:59 |
+| Antecedência mínima | Pelo menos 30 minutos à frente do horário atual |
+
+Caso alguma regra falhe:
+
+```text
+BusinessException → 400 Bad Request
+```
+
+
+
+## 2️⃣ CheckScheduleConflictUseCase — Conflito de Horário
+
+Consulta o banco:
+
+```java
+existsByProfessionalIdAndDateTime(professionalId, dateTime)
+```
+
+Caso já exista um agendamento no mesmo horário:
+
+```text
+ConflictException → 409 Conflict
+```
+
+
