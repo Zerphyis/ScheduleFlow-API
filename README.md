@@ -287,4 +287,151 @@ Cancela um agendamento.
 
 Cancelamento permitido apenas com 24 horas de antecedência.
 
+## 👤 Clientes — `/clients`
+
+---
+
+## POST `/clients`
+
+Cria um cliente.
+
+### Body
+
+```json
+{
+  "nome": "Maria Silva",
+  "cpf": "123.456.789-00",
+  "telefone": "(85) 99999-9999"
+}
+```
+
+#### Response — `201 Created`
+
+```json
+{
+  "id": 1,
+  "nome": "Maria Silva",
+  "cpf": "123.456.789-00",
+  "telefone": "(85) 99999-9999"
+}
+```
+
+#### Regras
+
+- CPF duplicado retorna `409 Conflict`.
+
+### GET `/clients`
+
+Lista todos os clientes.
+
+#### Response — `200 OK`
+
+Lista de `ClientResponseDTO`.
+
+#### Observações
+
+- Resposta cacheada.
+
+
+### GET `/clients/{id}`
+
+Busca cliente por ID.
+
+#### Response — `200 OK`
+
+```json
+{
+  "id": 1,
+  "nome": "Maria Silva",
+  "cpf": "123.456.789-00",
+  "telefone": "(85) 99999-9999"
+}
+```
+
+### PUT `/clients/{id}`
+
+Atualiza um cliente.
+
+#### Response — `200 OK`
+
+Cliente atualizado.
+
+
+
+### DELETE `/clients/{id}`
+
+Remove um cliente.
+
+#### Response — `204 No Content`
+
+
+
+##  🩺 Profissionais — `/api/professionals`
+
+### POST `/api/professionals`
+
+Cria um profissional.
+
+#### Body
+
+```json
+{
+  "nome": "Dr. João",
+  "especialidade": "Cardiologia",
+  "email": "joao@clinica.com"
+}
+```
+
+#### Response — `201 Created`
+
+```json
+{
+  "id": 1,
+  "nome": "Dr. João",
+  "especialidade": "Cardiologia",
+  "email": "joao@clinica.com"
+}
+```
+
+
+### GET `/api/professionals`
+
+Lista todos os profissionais.
+
+#### Response — `200 OK`
+
+Lista de `ProfessionalResponseDTO`.
+
+
+### GET `/api/professionals/{id}`
+
+Busca profissional por ID.
+
+#### Response — `200 OK`
+
+```json
+{
+  "id": 1,
+  "nome": "Dr. João",
+  "especialidade": "Cardiologia",
+  "email": "joao@clinica.com"
+}
+```
+
+
+### PUT `/api/professionals/{id}`
+
+Atualiza um profissional.
+
+#### Response — `200 OK`
+
+Profissional atualizado.
+
+
+### DELETE `/api/professionals/{id}`
+
+Remove um profissional.
+
+#### Response — `204 No Content`
+
 
